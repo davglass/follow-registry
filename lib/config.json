@@ -1,0 +1,5 @@
+{
+    "ua": "npm-registry-follower",
+    "skim": "https://skimdb.npmjs.com/registry",
+    "seqFile": "/tmp/registry-follow.seq"
+}
