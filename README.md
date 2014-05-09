@@ -23,3 +23,6 @@ why?
 
 http://blog.npmjs.org/post/83774616862/deprecating-fullfatdb
 
+build
+-----
+[![Build Status](https://travis-ci.org/davglass/follow-registry.svg?branch=master)](https://travis-ci.org/davglass/follow-registry)
