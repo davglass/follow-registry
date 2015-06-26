@@ -6,7 +6,7 @@ var noop = function() {};
 
 var followMock = function(opts, change) {
     process.nextTick(function() {
-        change(null, {});
+        change(null, {id: 'async', changes: [{rev: '806-539c2faa42188c0d254280e9afaa0c6e'}]});
     });
     return {
         pause: noop,
