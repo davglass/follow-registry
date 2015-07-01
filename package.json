@@ -1,6 +1,6 @@
 {
   "name": "follow-registry",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "npm registry follower",
   "main": "lib/index.js",
   "scripts": {
