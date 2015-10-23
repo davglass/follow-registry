@@ -58,6 +58,17 @@ var tests = {
         },
         'and return change': function(d) {
             assert.ok(d);
+        },
+        'and not reuse memory pointers': function(d) {
+            d.versions.forEach(function(item) {
+                var itemVersionObject = item.json;
+                var rootVersionObject = d.json.versions[itemVersionObject.version];
+                // Assert that json objects are distinct.
+                assert.isFalse(
+                    itemVersionObject === rootVersionObject,
+                    'Memory pointers are identical at "' + item.version + '"'
+                );
+            });
         }
     }
 };
