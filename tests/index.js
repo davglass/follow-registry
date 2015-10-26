@@ -13,7 +13,22 @@ var followMock = function(opts, change) {
         resume: noop
     };
 };
+var asyncJson = require('./async.json');
+asyncJson['dist-tags'].foobar = '100.123.456'; // bad version
+var requestMock = {
+    get: function(opts, cb){
+        assert.deepEqual(opts, {
+            url: 'https://skimdb.npmjs.com/registry/async',
+            json: true,
+            headers: {
+                'user-agent': 'npm-registry-follower'
+            }
+        });
+        cb(null, null, asyncJson);
+    }
+};
 mockery.registerMock('follow', followMock);
+mockery.registerMock('request', requestMock);
 mockery.enable({
     useCleanCache: true,
     warnOnReplace: false,
