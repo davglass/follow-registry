@@ -3,5 +3,6 @@
     "registry": "https://skimdb.npmjs.com/registry/",
     "skim": "https://skimdb.npmjs.com/registry",
     "seqFile": "/tmp/registry-follow.seq",
-    "concurrency": 100
+    "concurrency": 100,
+    "inactivity_ms": 3600000
 }
