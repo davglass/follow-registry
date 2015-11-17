@@ -2,5 +2,6 @@
     "ua": "npm-registry-follower",
     "registry": "https://skimdb.npmjs.com/registry/",
     "skim": "https://skimdb.npmjs.com/registry",
-    "seqFile": "/tmp/registry-follow.seq"
+    "seqFile": "/tmp/registry-follow.seq",
+    "concurrency": 100
 }
