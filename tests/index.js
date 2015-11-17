@@ -1,5 +1,4 @@
-var vows = require('vows'),
-    assert = require('assert'),
+var assert = require('assert'),
     mockery = require('mockery');
 
 var noop = function() {};
@@ -27,65 +26,64 @@ var requestMock = {
         cb(null, null, asyncJson);
     }
 };
-mockery.registerMock('follow', followMock);
-mockery.registerMock('request', requestMock);
-mockery.enable({
-    useCleanCache: true,
-    warnOnReplace: false,
-    warnOnUnregistered: false
-});
-
-var follow = require('../');
-
-var tests = {
-    'should export': {
-        topic: function() {
-            return follow;
-        },
-        'one function': function(d) {
-            assert.isFunction(d);
-        }
-    },
-    'should start': {
-        topic: function() {
-            var self = this;
-            follow({
-                handler: noop
-            }, function(f) {
-                self.callback(null, f);
-            });
-        },
-        'and return follower': function(d) {
-            assert.ok(d);
-        }
-    },
-    'should follow': {
-        topic: function() {
-            var self = this;
-            follow({
-                handler: function(json, callback) {
-                    callback();
-                    process.nextTick(function() {
-                        self.callback(null, json);
-                    });
-                }
-            });
-        },
-        'and return change': function(d) {
-            assert.ok(d);
-        },
-        'and not reuse memory pointers': function(d) {
-            d.versions.forEach(function(item) {
-                var itemVersionObject = item.json;
-                var rootVersionObject = d.json.versions[itemVersionObject.version];
-                // Assert that json objects are distinct.
-                assert.isFalse(
-                    itemVersionObject === rootVersionObject,
-                    'Memory pointers are identical at "' + item.version + '"'
-                );
-            });
-        }
+var asyncMock = {
+    queue: function(handler, concurrency) {
+        assert.equal(concurrency, 100);
+        return {
+            handler: handler,
+            push: function(change) {
+                handler(change, noop);
+            }
+        };
     }
 };
 
-vows.describe('follow-registry').addBatch(tests).export(module);
+var follow;
+
+describe('follow-registry', function(){
+    before(function(){
+        mockery.registerMock('follow', followMock);
+        mockery.registerMock('request', requestMock);
+        mockery.registerMock('async', asyncMock);
+        mockery.enable({
+            useCleanCache: true,
+            warnOnReplace: false,
+            warnOnUnregistered: false
+        });
+        follow = require('../');
+    });
+    after(function(){
+        mockery.deregisterAll();
+        mockery.disable();
+    });
+
+    it('should export one function', function(){
+        assert.equal(typeof follow, 'function');
+    });
+
+    it('should start and return follower', function(done) {
+        follow({handler: noop}, function(f){
+            assert(f);
+            done();
+        });
+    });
+
+    it('should follow, returning change and not reusing pointers', function(done){
+        follow({
+            handler: function(json, callback) {
+                assert(json);
+
+                json.versions.forEach(function(item) {
+                    var itemVersionObject = item.json;
+                    var rootVersionObject = json.json.versions[itemVersionObject.version];
+                    // Assert that json objects are distinct.
+                    assert.notStrictEqual(itemVersionObject, rootVersionObject,
+                        'Memory pointers are identical at "' + item.version + '"'
+                    );
+                });
+                done();
+            }
+        });
+    });
+});
+

@@ -4,7 +4,7 @@
   "description": "npm registry follower",
   "main": "lib/index.js",
   "scripts": {
-    "test": "istanbul cover --print both -- vows --spec ./tests/*.js"
+    "test": "istanbul cover --print both -- _mocha ./tests/*.js"
   },
   "author": "Dav Glass <davglass@gmail.com>",
   "dependencies": {
@@ -16,7 +16,7 @@
   "license": "BSD",
   "devDependencies": {
     "istanbul": "~0.3.5",
-    "mockery": "^1.4.0",
-    "vows": "~0.8.1"
+    "mocha": "^2.3.4",
+    "mockery": "^1.4.0"
   }
 }
