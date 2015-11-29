@@ -18,5 +18,9 @@
     "istanbul": "~0.3.5",
     "mocha": "^2.3.4",
     "mockery": "^1.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:davglass/follow-registry.git"
   }
 }
