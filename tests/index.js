@@ -17,7 +17,7 @@ asyncJson['dist-tags'].foobar = '100.123.456'; // bad version
 var requestMock = {
     get: function(opts, cb){
         assert.deepEqual(opts, {
-            url: 'https://skimdb.npmjs.com/registry/async',
+            url: 'https://replicate.npmjs.com/async',
             json: true,
             headers: {
                 'user-agent': 'npm-registry-follower'
