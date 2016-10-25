@@ -26,5 +26,16 @@ describe('registry', function () {
             assert.ok(results.json.versions['0.0.5-pre4']);
         });
     });
+
+    describe('get()', function () {
+        it('should retrieve valid data from the default registry', function (done) {
+            registry.get({id: 'async'}, function (err, json, change) {
+                assert.ok(!err);
+                assert.equal(json.name, 'async');
+                assert.deepEqual(change, {id: 'async'});
+                done();
+            });
+        });
+    });
 });
 
