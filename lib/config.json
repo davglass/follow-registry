@@ -2,7 +2,7 @@
     "ua": "npm-registry-follower",
     "protocol": "https:",
     "registry": "replicate.npmjs.com/registry",
-    "skim": "replicate.npmjs.com/registry",
+    "skim": "https://replicate.npmjs.com/registry",
     "seqFile": "/tmp/registry-follow.seq",
     "concurrency": 100,
     "inactivity_ms": 3600000
