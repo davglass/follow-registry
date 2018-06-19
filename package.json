@@ -9,7 +9,7 @@
   "author": "Dav Glass <davglass@gmail.com>",
   "dependencies": {
     "async": "^2.1.2",
-    "follow": "^0.12.1",
+    "follow": "^1.1.0",
     "mkdirp": "~0.5.1",
     "normalize-registry-metadata": "^1.1.2",
     "request": "^2.76.0"
