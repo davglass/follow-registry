@@ -4,7 +4,9 @@
   "description": "npm registry follower",
   "main": "lib/index.js",
   "scripts": {
-    "test": "istanbul cover --print both -- _mocha ./tests/*.js"
+    "test": "istanbul cover --print both -- _mocha ./tests/*.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Dav Glass <davglass@gmail.com>",
   "dependencies": {
@@ -12,7 +14,8 @@
     "follow": "^0.12.1",
     "mkdirp": "~0.5.1",
     "normalize-registry-metadata": "^1.1.2",
-    "request": "^2.76.0"
+    "request": "^2.76.0",
+    "snyk": "^1.192.4"
   },
   "license": "BSD",
   "devDependencies": {
@@ -23,5 +26,6 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:davglass/follow-registry.git"
-  }
+  },
+  "snyk": true
 }
